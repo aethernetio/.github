@@ -1,2 +1,2 @@
-# aethernetio
-Backend-as-a-Service platform for boosting application connectivity. All must-have tools in one solution save you time and save headache in development
+# Æthernet
+Platform for boosting application connectivity. All must-have network tools in one solution to save you time and headache in application development
