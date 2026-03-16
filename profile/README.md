@@ -10,7 +10,7 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Session Management in Unstable Networks**
 *   **Offline Message Buffering**
 *   **DDoS Protection and Abuse Prevention**
-## Main technical points of Æthernet platform
+## Main technical points of Æthernet
 
 **1. Client Architecture and Resource Optimization**
 
