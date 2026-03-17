@@ -35,3 +35,7 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Self-Provisioning with Adaptive Proof-of-Work:** Devices can securely and autonomously register themselves without prior account setup by completing a microcontroller-friendly bcrypt challenge that adaptively scales in difficulty to prevent Sybil and DoS attacks.
 *   **Zero-Trust Cryptography and Key Derivation:** Eliminating the operational hazards of expiring certificates, the system relies on a local Master Key that is never transmitted, instead deriving unique, ephemeral session keys for each server to ensure perfect forward secrecy and isolate potential breaches.
 *   **Hierarchical Management and Monetary Quotas:** Instead of requiring separate, complex REST APIs, the platform manages abuse protection, permissions, and routing through a built-in parent-child client hierarchy governed by strict monetary quotas.
+
+You can learn more about our technology on [our website](https://aethernet.io/technology.html)  
+To integrate our library into your project, follow the guidelines in the related repositories below or use [our tutorial](https://aethernet.io/tutorial.html)  
+For a deeper understanding of the platform and additional integration help, see our [developer documentation](https://aethernet.io/documentation.html)
