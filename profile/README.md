@@ -37,8 +37,8 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Hierarchical Management and Monetary Quotas:** Instead of requiring separate, complex REST APIs, the platform manages abuse protection, permissions, and routing through a built-in parent-child client hierarchy governed by strict monetary quotas.
 
 ## How to start
-**1. You can learn more about our technology on [our website](https://aethernet.io/technology.html)**  
-**2. To integrate our library into your project, follow [our tutorials](https://aethernet.io/tutorial.html) or the guidelines in the related repositories:**
+**1. You can learn more about our technology on our [website](https://aethernet.io/technology.html)**  
+**2. To integrate our library into your project, follow our [tutorials](https://aethernet.io/tutorial.html) or the guidelines in the related repositories:**
 * [C/C++](https://github.com/aethernetio/aether-client-cpp)
 * [Arduino (C/C++)](https://github.com/aethernetio/aether-client-arduino-library)
 * [Java](https://github.com/aethernetio/client-java)
