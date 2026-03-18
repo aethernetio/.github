@@ -36,6 +36,12 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Zero-Trust Cryptography and Key Derivation:** Eliminating the operational hazards of expiring certificates, the system relies on a local Master Key that is never transmitted, instead deriving unique, ephemeral session keys for each server to ensure perfect forward secrecy and isolate potential breaches.
 *   **Hierarchical Management and Monetary Quotas:** Instead of requiring separate, complex REST APIs, the platform manages abuse protection, permissions, and routing through a built-in parent-child client hierarchy governed by strict monetary quotas.
 
-You can learn more about our technology on [our website](https://aethernet.io/technology.html)  
-To integrate our library into your project, follow the guidelines in the related repositories below or use [our tutorial](https://aethernet.io/tutorial.html)  
-For a deeper understanding of the platform and additional integration help, see our [developer documentation](https://aethernet.io/documentation.html)
+## How to start
+**1. You can learn more about our technology on [our website](https://aethernet.io/technology.html)**  
+**2. To integrate our library into your project, follow [our tutorials](https://aethernet.io/tutorial.html) or the guidelines in the related repositories:**
+* [C/C++](https://github.com/aethernetio/aether-client-cpp)
+* [Arduino (C/C++)](https://github.com/aethernetio/aether-client-arduino-library)
+* [Java](https://github.com/aethernetio/client-java)
+* [TypeScript](https://github.com/aethernetio/client-ts)
+
+**3. For a deeper understanding of the platform and additional integration help, see our [developer documentation](https://aethernet.io/documentation.html)**
