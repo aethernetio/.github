@@ -1,5 +1,4 @@
-# Æthernet
-Æthernet is designed as a ready-to-use cloud infrastructure service that acts as a secure transport layer, allowing developers to focus entirely on their application's business logic rather than building and maintaining backend systems
+**Æthernet** is designed as a ready-to-use cloud infrastructure service that acts as a secure transport layer, allowing developers to focus entirely on their application's business logic rather than building and maintaining backend systems
 
 Here is a list of the complex engineering and operational tasks that Æthernet handles out-of-the-box, eliminating the need for you to develop them yourself:
 *   **Infrastructure Maintenance and Scaling (Zero Ops)**
@@ -10,7 +9,7 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Session Management in Unstable Networks**
 *   **Offline Message Buffering**
 *   **DDoS Protection and Abuse Prevention**
-## Main technical points of Æthernet
+# Main technical points of Æthernet
 
 **1. Client Architecture and Resource Optimization**
 
@@ -36,7 +35,7 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Zero-Trust Cryptography and Key Derivation:** Eliminating the operational hazards of expiring certificates, the system relies on a local Master Key that is never transmitted, instead deriving unique, ephemeral session keys for each server to ensure perfect forward secrecy and isolate potential breaches.
 *   **Hierarchical Management and Monetary Quotas:** Instead of requiring separate, complex REST APIs, the platform manages abuse protection, permissions, and routing through a built-in parent-child client hierarchy governed by strict monetary quotas.
 
-## How to start
+# How to start
 **1. You can learn more about our technology on our [website](https://aethernet.io/technology.html)**  
 **2. To integrate our library into your project, follow our [tutorials](https://aethernet.io/tutorial.html) or the guidelines in the related repositories:**
 * [C/C++](https://github.com/aethernetio/aether-client-cpp)
