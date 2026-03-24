@@ -35,6 +35,53 @@ Here is a list of the complex engineering and operational tasks that Æthernet h
 *   **Zero-Trust Cryptography and Key Derivation:** Local Master Keys utilize HKDF to derive ephemeral ChaCha20-Poly1305 keys per server, ensuring Perfect Forward Secrecy without vulnerable TLS certificates
 *   **Hierarchical Management and Monetary Quotas:** Routing and abuse mitigation are governed natively by a protocol-level parent-child tree using automated monetary quotas instead of REST APIs
 
+# System requirements and capabilities
+
+OS and architecture support
+
+- Compilers: C++17-compliant: GCC, LLVM, MSVC
+- OS and CPU:
+  - Windows (x86, x64)
+  - macOS (x86_64)
+  - Ubuntu/Debian (x86, x64, RISC-V)
+  - Raspberry Pi OS (Pi 3, 5), Orange Pi OS (RISC-V)
+  - OpenWrt (MIPS Linkit Smart 7688)
+  - FreeBSD (x64)
+  - Debian on IBM s390x
+  - RHEL9 on IBM POWER
+  - Solaris (x64)
+  - QNX
+- Toolchains: Arduino (ARM, Xtensa, RISC-V), ESP-IDF (Xtensa, RISC-V), MSBuild, Xcode, CMake (*nix-based, windows)
+
+## Communication technologies and adapters
+
+- Ethernet: Wired, full real-time, no credentials
+- Wi-Fi: SSID+password, power saving (TWT Wi-Fi 6, DTIM)
+- LAN: UDP/TCP direct, broadcast discovery, buffer-role for offline
+- GSM: BG95, BG77, BG770, SIM7070A/SIM7000A, nRF9151; NB-IoT/LTE-M/2G
+- Satellite - GSM NTN-IoT (Skylo)
+- LoRa: SX1262 (client / gateway), SX1303 (gateway)
+  1. Via LoRaWAN
+  2. Through our own real-time protocol over LoRa
+- BLE/Zigbee/Z-Wave: Via gateway
+- 2.4 GHz proprietary protocol similar to BLE, but for real-time
+- Iridium satellite: For extreme remote
+
+## Microcontrollers and ecosystems
+
+- MCU: ESP32, Raspberry Pi, Orange Pi, STM32, Nordic (nRF9151), ARM ARM/Xtensa/RISC-V, MIPS Links Smart 7688
+- Min requirements for C++:
+  - RAM 30 KB
+  - ROM 1 Kb bytes
+  - Binary 300 KB (Windows)
+- Wrappers:
+  - C-interface (simplified API),
+  - Objective-C
+  - Swift
+  - Java-JNI
+  - WASM
+- Ecosystems: CMake, Arduino Studio, VS Code+PlatformIO, Microsoft Visual Studio 2026
+
 # How to start
 **1. You can learn more about our technology on our [website](https://aethernet.io/technology.html)**  
 **2. To integrate our library into your project, follow our [tutorials](https://aethernet.io/tutorial.html) or the guidelines in the related repositories:**
