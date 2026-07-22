@@ -83,11 +83,11 @@ OS and architecture support
 - Ecosystems: CMake, Arduino Studio, VS Code+PlatformIO, Microsoft Visual Studio 2026
 
 # How to start
-**1. You can learn more about our technology on our [website](https://aethernet.io/technology.html)**  
-**2. To integrate our library into your project, follow our [tutorials](https://aethernet.io/tutorial.html) or the guidelines in the related repositories:**
+**1. You can learn more about our technology on our [website](https://aethernet.io/technology)**  
+**2. To integrate our library into your project, follow our [tutorials](https://aethernet.io/tutorial) or the guidelines in the related repositories:**
 * [C/C++](https://github.com/aethernetio/aether-client-cpp)
 * [Arduino (C/C++)](https://github.com/aethernetio/aether-client-arduino-library)
 * [Java](https://github.com/aethernetio/client-java)
 * [TypeScript](https://github.com/aethernetio/client-ts)
 
-**3. For a deeper understanding of the platform and additional integration help, see our [developer documentation](https://aethernet.io/documentation.html)**
+**3. For a deeper understanding of the platform and additional integration help, see our [developer documentation](https://aethernet.io/documentation)**
