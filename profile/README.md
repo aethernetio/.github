@@ -1,93 +1,93 @@
-**Æthernet** is designed as a ready-to-use cloud infrastructure service that acts as a secure transport layer, allowing developers to focus entirely on their application's business logic rather than building and maintaining backend systems
+# Æthernet
 
-Here is a list of the complex engineering and operational tasks that Æthernet handles out-of-the-box, eliminating the need for you to develop them yourself:
-*   **Infrastructure Maintenance and Scaling (Zero Ops)**
-*   **Device Onboarding and Registration**
-*   **Security and Cryptography**
-*   **Dynamic Routing and Failover**
-*   **Power and Energy Management**
-*   **Session Management in Unstable Networks**
-*   **Offline Message Buffering**
-*   **DDoS Protection and Abuse Prevention**
-# Main technical points of Æthernet
+**Cloud connectivity infrastructure for IoT devices and connected applications.**
 
-**1. Client Architecture and Resource Optimization**
+Æthernet provides a secure transport layer between devices, applications, and backends. It handles the network infrastructure and protocol logic so product teams can keep their business logic and databases in their own stack instead of building and operating a device backend from scratch.
 
-*   **Thick Client:** On-device logic autonomously manages multi-transport switching and AP-specific power-saving (e.g., Wi-Fi DTIM, TWT) without relying on a central broker
-*   **Object System and Distillation:** Dev-time pre-serialization eliminates runtime constructors, enabling zero-allocation deserialization and a minimal <300 KB binary footprint
-*   **Specialized Numeric Types:** Custom types (TieredInt, Fixed, Exponent) deliver overflow-safe, zero-FPU arithmetic and logarithmic compression to drastically save RAM
-*   **Zero-overhead Telemetry:** Compile-time macros physically strip string identifiers, logging execution metrics with zero CPU overhead and minimal flash consumption
+It is designed for embedded, desktop, mobile, and web clients, including systems that operate over unstable, high-latency, or bandwidth-constrained networks.
 
-**2. Network Protocol and Data Transmission**
+[Website](https://aethernet.io) · [Technology](https://aethernet.io/technology) · [Documentation](https://aethernet.io/documentation) · [Integration tutorials](https://aethernet.io/tutorial) · [Examples](https://github.com/aethernetio/aethernet-examples)
 
-*   **Native Stateless Protocol:** A handshake-free protocol embeds per-request cryptographic authentication, completely eliminating session states for high-loss networks
-*   **Anti-Queue Paradigm:** Stateless relays buffer E2E-encrypted payloads for a strict 10-second maximum, rejecting traditional stateful store-and-forward brokers
-*   **Repeat Message Optimization:** Recurring payloads use a secure 4-byte hash of the previous request, replacing easily spoofed TCP keep-alives and minimizing bandwidth
+## What Æthernet handles
 
-**3. Cloud Architecture and Routing**
+- infrastructure maintenance, scaling, replication, and failover;
+- device onboarding, registration, identity, and hierarchy management;
+- end-to-end encrypted messaging and access control;
+- routing, endpoint selection, retries, and recovery after network changes;
+- session and connection logic for unstable networks;
+- delivery policies and short-term buffering for offline clients;
+- traffic quotas and protection against registration abuse;
+- transport-specific connectivity and power-saving behavior.
 
-*   **Personal Cloud and Hot Swapping:** Clients dynamically balance traffic across a personalized, geo-distributed relay subset, executing millisecond-level hot-swapping upon latency spikes
-*   **Two Cloud Environment and Lightweight Relays:** Segregating registration nodes from stateless data planes enables cost-effective scaling and zero-downtime rolling updates
+## How it works
 
-**4. Security and Identity Management**
+### Stateless, no-handshake requests
 
-*   **Self-Provisioning with Adaptive Proof-of-Work:** Headless devices autonomously register via an adaptively scaled, MCU-friendly bcrypt challenge (4 KB RAM) to thwart Sybil attacks
-*   **Zero-Trust Cryptography and Key Derivation:** Local Master Keys utilize HKDF to derive ephemeral ChaCha20-Poly1305 keys per server, ensuring Perfect Forward Secrecy without vulnerable TLS certificates
-*   **Hierarchical Management and Monetary Quotas:** Routing and abuse mitigation are governed natively by a protocol-level parent-child tree using automated monetary quotas instead of REST APIs
+After registration, a normal request is a single message containing the information required for authentication, encryption, and delivery. It does not require a preliminary session handshake. This reduces connection overhead and allows a client to recover quickly after packet loss, a transport change, or an unavailable endpoint.
 
-# System requirements and capabilities
+### Thick client
 
-OS and architecture support
+Connectivity logic runs in the client library. The client can select endpoints, retry or duplicate requests, switch transports, and react to conditions that only the device can observe. Application code uses the same messaging model while the client handles the network path.
 
-- Compilers: C++17-compliant: GCC, LLVM, MSVC
-- OS and CPU:
-  - Windows (x86, x64)
-  - macOS (x86_64)
-  - Ubuntu/Debian (x86, x64, RISC-V)
-  - Raspberry Pi OS (Pi 3, 5), Orange Pi OS (RISC-V)
-  - OpenWrt (MIPS Linkit Smart 7688)
-  - FreeBSD (x64)
-  - Debian on IBM s390x
-  - RHEL9 on IBM POWER
-  - Solaris (x64)
-  - QNX
-- Toolchains: Arduino (ARM, Xtensa, RISC-V), ESP-IDF (Xtensa, RISC-V), MSBuild, Xcode, CMake (*nix-based, windows)
+### Personal Cloud and endpoint switching
 
-## Communication technologies and adapters
+Each client receives a dynamically selected subset of geographically distributed Æthernet servers. The client can contact these endpoints sequentially or simultaneously and switch when latency or availability changes. The cloud can be reconfigured for location, load balancing, maintenance, or failure recovery.
 
-- Ethernet: Wired, full real-time, no credentials
-- Wi-Fi: SSID+password, power saving (TWT Wi-Fi 6, DTIM)
-- LAN: UDP/TCP direct, broadcast discovery, buffer-role for offline
-- GSM: BG95, BG77, BG770, SIM7070A/SIM7000A, nRF9151; NB-IoT/LTE-M/2G
-- Satellite - GSM NTN-IoT (Skylo)
-- LoRa: SX1262 (client / gateway), SX1303 (gateway)
-  1. Via LoRaWAN
-  2. Through our own real-time protocol over LoRa
-- BLE/Zigbee/Z-Wave: Via gateway
-- 2.4 GHz proprietary protocol similar to BLE, but for real-time
-- Iridium satellite: For extreme remote
+### Separate registration and working clouds
 
-## Microcontrollers and ecosystems
+New clients register through a dedicated registration cloud. Registered clients exchange operational traffic through the working cloud. Keeping these roles separate limits registration-specific state and allows the data plane to remain lightweight.
 
-- MCU: ESP32, Raspberry Pi, Orange Pi, STM32, Nordic (nRF9151), ARM ARM/Xtensa/RISC-V, MIPS Links Smart 7688
-- Min requirements for C++:
-  - RAM 30 KB
-  - ROM 1 Kb bytes
-  - Binary 300 KB (Windows)
-- Wrappers:
-  - C-interface (simplified API),
-  - Objective-C
-  - Swift
-  - Java-JNI
-  - WASM
-- Ecosystems: CMake, Arduino Studio, VS Code+PlatformIO, Microsoft Visual Studio 2026
+### Self-provisioning and identity
 
-# How to start
-**1. You can learn more about our technology on our [website](https://aethernet.io/technology)**  
-**2. To integrate our library into your project, follow our [tutorials](https://aethernet.io/tutorial) or the guidelines in the related repositories:**
-* [C/C++](https://github.com/aethernetio/aether-client-cpp)
-* [Arduino (C/C++)](https://github.com/aethernetio/aether-client-arduino-library)
-* [Java](https://github.com/aethernetio/client-java)
-* [TypeScript](https://github.com/aethernetio/client-ts)
+Clients can register without manual credential installation. Registration uses a three-step stateless flow and an adaptive Proof-of-Work challenge intended to reduce automated registration abuse while remaining practical for constrained devices. Each client receives a permanent UID, a master key, and its initial Personal Cloud.
 
-**3. For a deeper understanding of the platform and additional integration help, see our [developer documentation](https://aethernet.io/documentation)**
+### End-to-end security
+
+Payloads are encrypted between clients. Master keys are not transferred to working servers; server-specific keys are derived from the client master key. Æthernet uses established cryptographic libraries and keeps application data encrypted while relays route it.
+
+### Hierarchical management
+
+Every client belongs to a parent-child hierarchy. An application server is itself an Æthernet client and can register children, assign quotas, control messaging permissions, and receive lifecycle events through the same protocol instead of maintaining a separate device-management API.
+
+## SDKs
+
+| Platform | Repository | Integration |
+| --- | --- | --- |
+| C / C++ | [aether-client-cpp](https://github.com/aethernetio/aether-client-cpp) | CMake, desktop, embedded, ESP-IDF, PlatformIO |
+| Arduino / ESP32 | [aether-client-arduino-library](https://github.com/aethernetio/aether-client-arduino-library) | Arduino library |
+| Java | [client-java](https://github.com/aethernetio/client-java) | Java / Gradle |
+| TypeScript | [client-ts](https://github.com/aethernetio/client-ts) | Node.js and browser |
+
+For runnable integrations, see [aethernet-examples](https://github.com/aethernetio/aethernet-examples). Detailed build requirements and supported environments are documented in the relevant SDK repository and in the [client environment documentation](https://aethernet.io/documentation).
+
+## Networks and transports
+
+Æthernet uses one messaging model across different network paths. Available integrations include:
+
+- UDP / DTLS;
+- TCP / TLS;
+- HTTP / HTTPS;
+- WebSocket / WSS;
+- Ethernet and Wi-Fi;
+- NB-IoT, LTE-M, 2G, and NTN cellular;
+- LoRa and LoRaWAN;
+- gateway-connected BLE, Zigbee, and Z-Wave networks.
+
+Transport and hardware availability depends on the client library and adapter. Check the relevant repository before selecting a production target.
+
+## Open-source components
+
+- [Æthernet Examples](https://github.com/aethernetio/aethernet-examples): runnable client and device integrations.
+- [Æthernet Numeric](https://github.com/aethernetio/aethernet-numeric): compact numeric types for constrained C++ systems.
+- [Æthernet Compression](https://github.com/aethernetio/aethernet-compression): experimental compression for small structured messages.
+- [Æthernet Gateway](https://github.com/aethernetio/aether-gateway): connectivity bridge for non-IP and constrained clients.
+- [Temperature Sensor](https://github.com/aethernetio/temperature-sensor): an ESP32-based reference device.
+
+## Get started
+
+1. Choose a client library from the table above.
+2. Follow the corresponding [integration tutorial](https://aethernet.io/tutorial).
+3. Run an example from [aethernet-examples](https://github.com/aethernetio/aethernet-examples).
+4. Use the [developer documentation](https://aethernet.io/documentation) for architecture and API details.
+
+Questions and bug reports belong in the issue tracker of the relevant repository.
